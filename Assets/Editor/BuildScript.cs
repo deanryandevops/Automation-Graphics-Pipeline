@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BuildScript
+public static class BuildScript
 {
     // Method to be called from command line
     public static void PerformBuild()
@@ -20,6 +20,8 @@ public class BuildScript
             System.IO.Directory.CreateDirectory(buildPath);
         }
 
+        Debug.Log("Build path: " + buildPath);
+        
         // Perform the build
         BuildPipeline.BuildPlayer(scenes, buildPath, BuildTarget.StandaloneWindows64, BuildOptions.None);
 

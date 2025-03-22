@@ -1,3 +1,6 @@
+using UnityEditor;
+using UnityEngine;
+
 public class BuildScript
 {
     // Method to be called from command line

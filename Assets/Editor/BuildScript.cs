@@ -12,19 +12,16 @@ public static class BuildScript
         string[] scenes = { "Assets/Scenes/SampleScene.unity" }; // Adjust to your scenes
 
         // Define the build path
-        string buildPath = "Builds/HeadlessBuild";
+        string modelsPath = "Assets/ConvertedModels";
 
         // Ensure the build directory exists
-        if (!System.IO.Directory.Exists(buildPath))
+        if (!System.IO.Directory.Exists(modelsPath))
         {
-            System.IO.Directory.CreateDirectory(buildPath);
+            System.IO.Directory.CreateDirectory(modelsPath);
         }
 
-        Debug.Log("Build path: " + buildPath);
-        
-        // Perform the build
-        BuildPipeline.BuildPlayer(scenes, buildPath, BuildTarget.StandaloneWindows64, BuildOptions.None);
+        Debug.Log("models path: " + modelsPath);
 
-        Debug.Log("Build complete!");
+        Debug.Log("Process complete!");
     }
 }

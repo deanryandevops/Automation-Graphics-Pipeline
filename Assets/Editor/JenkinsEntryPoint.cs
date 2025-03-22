@@ -1,18 +1,15 @@
 using UnityEditor;
 using UnityEngine;
 
-public static class BuildScript
+public static class JenkinsEntryPoint
 {
     // Method to be called from command line
-    public static void PerformBuild()
+    public static void ConvertModel()
     {
-        Debug.Log("Starting headless build!");
-
-        // Define the scenes to include in the build
-        string[] scenes = { "Assets/Scenes/SampleScene.unity" }; // Adjust to your scenes
+        Debug.Log("Starting headless unity!");
 
         // Define the build path
-        string modelsPath = "Assets/ConvertedModels";
+        string modelsPath = "Assets/ModelToConvert";
 
         // Ensure the build directory exists
         if (!System.IO.Directory.Exists(modelsPath))

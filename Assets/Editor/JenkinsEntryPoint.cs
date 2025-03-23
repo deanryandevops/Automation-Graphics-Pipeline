@@ -13,16 +13,8 @@ public static class JenkinsEntryPoint
         Debug.Log("Assets Folder Path: " + assetsPath);
 
         // Define the build path
-        string modelsPath = "/ModelToConvert";
+        string modelsPath = "ModelToConvert";
 
-        // Ensure the build directory exists
-        if (!System.IO.Directory.Exists(modelsPath))
-        {
-            System.IO.Directory.CreateDirectory(modelsPath);
-        }
-
-        Debug.Log("models path: " + modelsPath);
-        
         string fullModelPath = System.IO.Path.Combine(assetsPath, modelsPath);
         // Get all files in the directory
         string[] modelFiles = Directory.GetFiles(fullModelPath);

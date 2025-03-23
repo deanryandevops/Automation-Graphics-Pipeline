@@ -26,6 +26,7 @@ public static class JenkinsEntryPoint
         Debug.Log("fileNameWithoutExtension:"+fileNameWithoutExtension);
         // Find the object by name
         GameObject selectedObject = GameObject.Find(fileNameWithoutExtension);
+        Debug.Log("selectedObject.name:"+selectedObject.name);
         
         if(selectedObject == null) return;
         

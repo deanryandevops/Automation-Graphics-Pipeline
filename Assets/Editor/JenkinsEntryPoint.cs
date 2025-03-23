@@ -5,27 +5,39 @@ using UnityEngine;
 
 public static class JenkinsEntryPoint
 {
-    // Method to be called from command line
+    // Method to be called from command line or editor
     public static void ConvertModel()
     {
-        Debug.Log("Starting headless unity!");
+        Debug.Log("Starting model conversion in the Unity Editor!");
+
+        // Get the path to the Assets folder
         string assetsPath = Application.dataPath;
         Debug.Log("Assets Folder Path: " + assetsPath);
 
-        // Define the build path
+        // Define the path to the models folder
         string modelsPath = "ModelToConvert";
 
-        string fullModelPath = System.IO.Path.Combine(assetsPath, modelsPath);
-        // Get all files in the directory
-        string[] modelFiles = Directory.GetFiles(fullModelPath)
-            .Where(file => !file.EndsWith(".meta"))
-            .ToArray();
-        string currentModelFile = modelFiles.First();
-        Debug.Log("currentModelFile: " + currentModelFile);
+        // Combine the paths to get the full path to the models folder
+        string fullModelPath = Path.Combine(assetsPath, modelsPath);
 
-        Debug.Log("Process complete!");
+        // Get all files in the directory, excluding meta files
+        string[] modelFiles = Directory.GetFiles(fullModelPath)
+                                      .Where(file => !file.EndsWith(".meta"))
+                                      .ToArray();
+
+        if (modelFiles.Length == 0)
+        {
+            Debug.LogError("No model files found in the directory: " + fullModelPath);
+            return;
+        }
+
+        // Get the first model file
+        string currentModelFile = modelFiles.First();
+        Debug.Log("Current Model File: " + currentModelFile);
+
+        // Get the file name without extension
         string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(currentModelFile);
-        Debug.Log("fileNameWithoutExtension:"+fileNameWithoutExtension);
+        Debug.Log("File Name Without Extension: " + fileNameWithoutExtension);
 
         // Find the object in the project (e.g., a prefab or model)
         string[] assetGuids = AssetDatabase.FindAssets(fileNameWithoutExtension);
@@ -34,7 +46,7 @@ public static class JenkinsEntryPoint
             Debug.LogError("Object not found in the project: " + fileNameWithoutExtension);
             return;
         }
-        
+
         // Get the first matching asset
         string assetPath = AssetDatabase.GUIDToAssetPath(assetGuids[0]);
         GameObject selectedObject = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
@@ -55,10 +67,14 @@ public static class JenkinsEntryPoint
         EditorGUIUtility.PingObject(selectedObject);
         Debug.Log("Pinged object in the Project window.");
 
-        // Rename the object
+        // Rename the asset
         string newName = "DEAN IS STAR";
-        selectedObject.name = newName;
-        Debug.Log("Object renamed to: " + newName);
+        AssetDatabase.RenameAsset(assetPath, newName);
+        Debug.Log("Asset renamed to: " + newName);
+
+        // Refresh the AssetDatabase to reflect the changes
+        AssetDatabase.Refresh();
+        Debug.Log("AssetDatabase refreshed.");
 
         // Save the changes to the asset
         AssetDatabase.SaveAssets();

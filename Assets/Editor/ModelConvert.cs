@@ -111,24 +111,41 @@ public static class ModelConvert
 
         
 
-        BuildAddressables();
+        BuildAddressables(settings);
     }
 
 
-    private static void BuildAddressables()
+    private static void BuildAddressables(AddressableAssetSettings settings)
     {
         Debug.Log("Starting Addressables build");
+        
+        // 2. Handle profile switching more safely
+        string targetProfileName = "Remote"; // Change this if your profile has a different name
+        bool profileFound = false;
+
+        // Alternative way to find profile that works in newer Unity versions
+        var profileIds = settings.profileSettings.GetAllProfileNames();
+        foreach (var profileId in profileIds)
+        {
+            if (settings.profileSettings.GetProfileName(profileId) == targetProfileName)
+            {
+                settings.activeProfileId = profileId;
+                Debug.Log($"Switched to profile: {targetProfileName} (ID: {profileId})");
+                profileFound = true;
+                break;
+            }
+        }
+
+        if (profileFound == false)
+        {
+            Debug.Log("Not Found");
+        }
         
         // Clean previous build
         AddressableAssetSettings.CleanPlayerContent();
 
         // Build with default script
         AddressableAssetSettings.BuildPlayerContent();
-
-        // Alternative: Specific build script
-        // var buildScript = AddressableAssetSettingsDefaultObject.Settings
-        //     .DataBuilders.FirstOrDefault(d => d.name.Contains("PackedMode"));
-        // AddressableAssetSettings.BuildPlayerContent(buildScript);
 
         Debug.Log("Addressables build completed");
     }

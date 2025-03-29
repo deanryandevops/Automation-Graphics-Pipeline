@@ -15,8 +15,14 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 51319bb1fc3ee9f4bb4855d9f647f92d
-  m_SerializeEntries: []
+  m_GUID: d860783e2e5999f439f4d86d0a9d10db
+  m_SerializeEntries:
+  - m_GUID: 8c20d4abedf49414ca08d2e04ff4ca2b
+    m_Address: Assets/ModelToConvert/DEAN
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d126affce008cfa409d68dc9c7543e0f, type: 2}
   m_SchemaSet:

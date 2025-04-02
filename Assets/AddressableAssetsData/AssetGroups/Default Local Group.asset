@@ -18,10 +18,9 @@ MonoBehaviour:
   m_GUID: d860783e2e5999f439f4d86d0a9d10db
   m_SerializeEntries:
   - m_GUID: 8c20d4abedf49414ca08d2e04ff4ca2b
-    m_Address: Assets/ModelToConvert/DEAN
+    m_Address: DEAN IS STAR
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d126affce008cfa409d68dc9c7543e0f, type: 2}

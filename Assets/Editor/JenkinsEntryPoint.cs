@@ -12,7 +12,7 @@ public static class JenkinsEntryPoint
     public static void ConvertModel()
     {
         SaveCurrentScene();
-        
+         Debug.Log("[JenkinsEntryPoint]");
         Debug.Log("Starting model conversion in the Unity Editor!");
 
         // Get the path to the Assets folder
